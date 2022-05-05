@@ -1,4 +1,5 @@
 #!/bin/sh
+cd /home/harivarshan
 a=1
 while [ "$a" -lt 10 ]
 do
