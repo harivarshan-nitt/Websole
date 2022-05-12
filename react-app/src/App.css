@@ -1,18 +1,6 @@
-
-#websole{
-  width: 100%;
-  height: 80px;
-  color: white;
-  background-image: linear-gradient(to right,#484848, #2c2c2c);
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-}
 #back{
   width: 100%;
-  height: 1039px;
+  height: 100%;
   background-size: cover;
   background-attachment: fixed; 
   background-repeat: no-repeat;
@@ -20,28 +8,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
+
 #terminal_box
 {
   width: 700px;
   height: 450px;
   position: fixed;
 }
+
 #thead
 {
   height: 50px;
   width: 100%;
   border-radius: 10px 10px 0px 0px;
   background-color:#2c2c2c;
+  
 }
+
 #terminal
 {
-  width: 700px;
+  width: 100%;
   height: 400px;
-  background-color: black;
+  background-color: rgb(10, 0, 26);
   border-radius: 0px 0px 10px 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
 #exit_terminal{
   width: 80px;
   height: 50px;
@@ -53,32 +47,22 @@
   justify-content: center;
   align-items: center;
 }
-#nt{
-  width: 80px;
-  height: 50px;
-  float: left;
-  border-radius: 10px 0px 0px 0px;
-  text-align: center;
-  background-color: #484848;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 #terminal_title
 {
   height: 50px;
-  width: 540px;
   float:left;
   color: white;
-  background-image: linear-gradient(to right,#484848, #2c2c2c);
+  background-color: #2c2c2c;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;  
 }
+
 .cmd
 {
-  width: 700px;
+  width: 100%;
   float: left;
   margin: 0%;
   color: white;
@@ -96,6 +80,7 @@
   color: greenyellow;
   font-size: 20px;
 }
+
 .cmd_res
 {
   width: auto;
@@ -107,32 +92,36 @@
   text-align: left;
   justify-content: left;
 }
+
 .cmd_text
 {
   width: 100%;
 }
+
 #input_bar
 {
-  border-color: black;
+  border-color: rgb(10, 0, 26);
   border-radius: 1px;
-  width: 700px;
+  width: 100%;
   height: 30px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;  
 }
+
 input
 {
-  
   height: 30px;
   float: left;
   width: 100%;
 }
-#send
-{
-  height: 30px;
-  width: 70px;
-  font-size: 20px;
-  float: right;
+
+@media only screen and (max-width:750px) {
+  #terminal_box
+  {
+    width: 100%;
+  }
+  
+  
 }

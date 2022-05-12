@@ -1,0 +1,22 @@
+#ani_back
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(10, 0, 26);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ani_box
+{
+    width: 100%;
+    height: 300px;
+    color: greenyellow;
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
