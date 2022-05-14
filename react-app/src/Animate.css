@@ -20,3 +20,10 @@
     align-items: center;
 
 }
+@media only screen and (max-width:550px) {
+
+    #ani_box
+    {
+        font-size: 40px;
+    }
+}

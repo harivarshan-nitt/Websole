@@ -1,5 +1,8 @@
 import React from 'react';
+import { Navigate} from 'react-router-dom';
 import './App.css';
+
+const restApiUrl = "http://localhost:2000";
 
 class App extends React.Component 
 {
@@ -26,7 +29,7 @@ class App extends React.Component
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "data":cmd,"jwt":this.state.jwt })
       };
-      const response = await fetch('http://localhost:2000/websole', requestOptions);
+      const response = await fetch(restApiUrl+'/websole', requestOptions);
       const obj_res = await response.json();
       
       if(String(obj_res.msg) === "success")
@@ -41,17 +44,15 @@ class App extends React.Component
       else this.setState({ websole:false});
     }
   }
-
   componentDidUpdate() {
     var terminalDiv = document.getElementById("terminal");
     if(terminalDiv) terminalDiv.scrollTop = terminalDiv.scrollHeight;
   }
-  
   render()
-  {
+  { 
     if(this.state.websole === false)
     {
-      window.location.reload();
+      return <Navigate to="/websole" />;
     }
     var children = this.myData.map((val) => (
       <div key={val.key}>

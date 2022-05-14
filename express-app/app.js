@@ -7,6 +7,8 @@ const { compare } = require('bcrypt');
 const jwt = require("jsonwebtoken");
 var rand = require("random-key");
 
+const PORT = 2000;
+
 require('./db/mongo');
 const dbSchema = require('./db/user');
 
@@ -21,7 +23,7 @@ const app = express();
 app.use(cors({origin: '*'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.listen(2000);
+app.listen(PORT);
 
 app.post('/websole', async(req, res) =>{
     

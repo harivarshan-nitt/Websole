@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login'
+import { Navigate } from 'react-router-dom';
 import './Animate.css';
 
 const textData = "~ $ WEBSOLE ^C";
@@ -39,7 +39,7 @@ class Animate extends React.Component
     render()
     {
         if (this.state.redirect === true) {
-            return <Login />
+            return <Navigate to="/websole" />;
         }
         return <>
             <div id = "ani_back"> 

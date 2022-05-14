@@ -1,6 +1,8 @@
 import React from 'react';
 import './Login.css';
-import App from './App.js';
+import App from './App';
+
+const restApiUrl = "http://localhost:2000";
 
 class Login extends React.Component 
 {
@@ -39,7 +41,7 @@ class Login extends React.Component
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "username":this.state.username,"password":this.state.password })
         };
-        const response = await fetch("http://localhost:2000/"+this.state.type.toLowerCase(), requestOptions);
+        const response = await fetch(restApiUrl+"/"+this.state.type.toLowerCase(), requestOptions);
         const resObj = await response.json();
         if(resObj.response === "success")
         {

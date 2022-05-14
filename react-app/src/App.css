@@ -112,16 +112,44 @@
 
 input
 {
-  height: 30px;
+  height: 100%;
   float: left;
   width: 100%;
 }
 
 @media only screen and (max-width:750px) {
+  #back{
+    width: 100%;
+    height: 100%;
+  }
   #terminal_box
   {
     width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0px;
+    left: 0px;
   }
-  
-  
+  #terminal
+  {
+    height: 80%;
+    border-radius: 0px 0px 0px 0px;    
+  }
+  #thead
+  {
+    border-radius: 0px 0px 0px 0px;
+    height: 10%;
+  }
+  #exit_terminal
+  {   
+    visibility: hidden;
+  }
+  #input_bar
+  {
+    height: 10%; 
+  }
+  #terminal_title
+  {
+    height: 10%;  
+  }
 }
