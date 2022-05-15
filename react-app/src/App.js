@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate} from 'react-router-dom';
 import './App.css';
 
 const restApiUrl = "http://localhost:2000";
@@ -52,7 +51,7 @@ class App extends React.Component
   { 
     if(this.state.websole === false)
     {
-      return <Navigate to="/websole" />;
+      window.location.reload();
     }
     var children = this.myData.map((val) => (
       <div key={val.key}>
