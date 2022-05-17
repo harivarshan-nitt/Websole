@@ -1,7 +1,6 @@
 #!/bin/sh
-cd /home/harivarshan
-a=1
-while [ "$a" -lt 10 ]
+cd /
+while true
 do
 read MESSAGE<&$NODE_CHANNEL_FD
 SUBSTRING=$(echo $MESSAGE| cut -d'"' -f 2)

@@ -9,12 +9,13 @@ var rand = require("random-key");
 
 const PORT = 2000;
 
+const timeOut = "10m";
+const timeOutMs = 10*60*1000;
+
 require('./db/mongo');
 const dbSchema = require('./db/user');
 
-const cons = cp.spawn('./websole.sh', [], {shell: true ,
-    stdio: ['ignore', 'ignore', 1, 'ipc']
-});
+var usersTerminal={};
 
 var secretKey = rand.generate(100);
 
@@ -44,10 +45,19 @@ app.post('/websole', async(req, res) =>{
                 const user = await dbSchema.findOne({username:decodedToken.username});
                 if(user)
                 {
-                    cons.send(req.body.data);
-                    cons.on('message', (data) => {
+                    if(!usersTerminal[jwtToken])
+                    {
+                        var userTerminal = cp.spawn('./websole.sh', [], {shell: true ,
+                            stdio: ['ignore', 'ignore', 1, 'ipc']
+                        });
+                        usersTerminal[jwtToken] = userTerminal;
+                    }
+                    
+                    usersTerminal[jwtToken].send(req.body.data);
+                    usersTerminal[jwtToken].on('message', (data) => {
                         responseData.data= data;
                         responseData.msg = "success";
+                        usersTerminal[jwtToken].removeAllListeners();
                         res.end(JSON.stringify(responseData));
                     });
                 }
@@ -85,8 +95,9 @@ app.post('/login',async(req,res)=>{
                     token = jwt.sign(
                     { username: user.username },
                     secretKey,
-                    { expiresIn: "10m" }
+                    { expiresIn: timeOut }
                     );
+                    setTimeout(clearJWT,timeOutMs,token);
                 } catch (err) 
                 {
                     res.end(JSON.stringify({response:"UnExpected Error"}));
@@ -120,8 +131,9 @@ app.post('/sigin',async(req,res)=>{
                         token = jwt.sign(
                         { username: user.username },
                         secretKey,
-                        { expiresIn: "10m" }
+                        { expiresIn: timeOut }
                         );
+                        setTimeout(clearJWT,timeOutMs,jwt);
                     } catch (err) 
                     {
                         res.end(JSON.stringify({response:"UnExpected Error"}));
@@ -137,4 +149,8 @@ app.post('/sigin',async(req,res)=>{
     }
 });
 
-
+function clearJWT(jwt)
+{   
+    usersTerminal[jwt].disconnect();
+    delete usersTerminal[jwt];
+}
