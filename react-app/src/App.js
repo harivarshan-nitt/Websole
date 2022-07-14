@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 
-const restApiUrl = "http://localhost:2000";
-
 class App extends React.Component 
 {
   constructor(props) 
@@ -28,7 +26,7 @@ class App extends React.Component
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "data":cmd,"jwt":this.state.jwt })
       };
-      const response = await fetch(restApiUrl+'/websole', requestOptions);
+      const response = await fetch('/websole', requestOptions);
       const obj_res = await response.json();
       
       if(String(obj_res.msg) === "success")

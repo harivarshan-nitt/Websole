@@ -7,7 +7,7 @@ const { compare } = require('bcrypt');
 const jwt = require("jsonwebtoken");
 var rand = require("random-key");
 
-const PORT = 2000;
+const PORT = 3000;
 
 const timeOut = "10m";
 const timeOutMs = 10*60*1000;
@@ -24,6 +24,7 @@ const app = express();
 app.use(cors({origin: '*'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 app.listen(PORT);
 
 app.post('/websole', async(req, res) =>{
@@ -147,6 +148,10 @@ app.post('/sigin',async(req,res)=>{
     catch(error){
         res.end(JSON.stringify({response:"UnExpected Error"}));
     }
+});
+
+app.get("*", function (req, res) {
+    res.redirect('/');  
 });
 
 function clearJWT(jwt)
