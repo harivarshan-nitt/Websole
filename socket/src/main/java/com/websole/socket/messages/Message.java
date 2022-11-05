@@ -1,4 +1,4 @@
-package com.websole.socket;
+package com.websole.socket.messages;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

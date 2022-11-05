@@ -1,4 +1,4 @@
-package com.websole.socket;
+package com.websole.socket.database.blog;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

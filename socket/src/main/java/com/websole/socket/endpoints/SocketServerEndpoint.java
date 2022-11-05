@@ -1,9 +1,10 @@
-package com.websole.socket;
+package com.websole.socket.endpoints;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.websole.socket.messages.Message;
 
 import java.io.IOException;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 @ServerEndpoint(value = "/test")
-public class WebSocketServerEndpoint {
+public class SocketServerEndpoint {
 
     static Map<String, Session> liveSessions = new ConcurrentHashMap<>();
 

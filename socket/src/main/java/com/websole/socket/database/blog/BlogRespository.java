@@ -1,4 +1,4 @@
-package com.websole.socket;
+package com.websole.socket.database.blog;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
