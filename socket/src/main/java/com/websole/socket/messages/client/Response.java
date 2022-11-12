@@ -1,21 +1,18 @@
-package com.websole.socket.messages.executor;
+package com.websole.socket.messages.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ExecutorResponse {
-    @JsonProperty("command")
-    public String command;
-    @JsonProperty("clientId")
-    public String clientId;
+public class Response implements ClientResponse {
+    @JsonProperty("response")
+    public String response;
 
     @JsonProperty("topic")
     public String topic;
 
-    public ExecutorResponse(String command, String clientId, String topic) {
-        this.command = command;
-        this.clientId = clientId;
+    public Response(String response, String topic) {
+        this.response = response;
         this.topic = topic;
     }
 

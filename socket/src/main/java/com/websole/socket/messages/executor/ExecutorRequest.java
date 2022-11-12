@@ -1,5 +1,10 @@
 package com.websole.socket.messages.executor;
 
-public class ExecutorRequest {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class ExecutorRequest {
+    @JsonProperty("response")
+    public String response;
+    @JsonProperty("clientId")
+    public String clientId;
 }

@@ -6,10 +6,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Connections {
-    static Map<String, Type> connections = new ConcurrentHashMap<>();
+    static public Map<String, ConnectionType> connections = new ConcurrentHashMap<>();
 
     static public void addEntry(String id, String type) {
-        Type conectionType = Type.valueOf(type);
+        ConnectionType conectionType = ConnectionType.valueOf(type);
         synchronized (connections) {
             connections.put(id, conectionType);
         }
@@ -23,8 +23,8 @@ public class Connections {
 
     static public List<String> getExecutors() {
         List<String> executors = new ArrayList<String>();
-        for (Map.Entry<String, Type> entry : connections.entrySet()) {
-            if (entry.getValue() == Type.valueOf("EXECUTOR")) {
+        for (Map.Entry<String, ConnectionType> entry : connections.entrySet()) {
+            if (entry.getValue() == ConnectionType.valueOf("EXECUTOR")) {
                 executors.add(entry.getKey());
             }
         }
