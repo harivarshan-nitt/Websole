@@ -2,14 +2,12 @@ package com.websole.socket.endpoints;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.websole.socket.messages.Message;
-
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
+
+import com.websole.socket.database.connections.Connections;
+import com.websole.socket.database.mappings.Mappings;
 
 @ServerEndpoint(value = "/executor")
 public class ExecutorEndpoint {
@@ -22,25 +20,17 @@ public class ExecutorEndpoint {
         synchronized (liveSessions) {
             liveSessions.put(session.getId(), session);
         }
-
-        Future<Void> deliveryTracker = session.getAsyncRemote().sendText("Connection Id - " + session.getId());
-
+        Connections.addEntry(session.getId(), "EXECUTOR");
     }
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        Message msg = mapper.readValue(message, Message.class);
-
-        System.out.println(msg);
-        synchronized (liveSessions) {
-            Future<Void> deliveryTracker = liveSessions.get(msg.to).getAsyncRemote().sendText(msg.message);
-        }
     }
 
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
-        System.out.println("[SERVER]: Session " + session.getId() + " closed, because " + closeReason);
+        Connections.removeEntry(session.getId());
+        Mappings.removeExecutor(session.getId());
     }
 }
