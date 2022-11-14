@@ -1,23 +1,36 @@
-const cp = require('child_process');
+const WebSocket = require('ws');
+const ws = new WebSocket('ws://localhost:5000/ws/executor');
 
-var usersTerminal={};
+const {addClient,removeClient,executeCommand} = require('./Shell')
 
-function run(jwtToken){
-    if(!usersTerminal[jwtToken])
+ws.on('open', function open() {
+    console.log("Connected to WebSocket Server");
+});
+
+ws.on('message', function message(req) {
+    req = JSON.parse(req);
+    if(req.topic == "CONNECT")
     {
-        var userTerminal = cp.spawn('./websole.sh', [], {shell: true ,
-            stdio: ['ignore', 'ignore', 1, 'ipc']
-        });
-        usersTerminal[jwtToken] = userTerminal;
+        addClient(req.clientId,responseHandler);
     }
-    usersTerminal[jwtToken].send(req.body.data);
-    usersTerminal[jwtToken].on('message', (data) => {
-        usersTerminal[jwtToken].removeAllListeners();
-    });
-}
+    if(req.topic == "DISCONNECT")
+    {
+        removeClient(req.clientId);
+    }
+    if(req.topic == "COMMAND")
+    {
+        executeCommand(req.command);
+    }
+});
 
-function clearJWT(jwt)
+ws.on('error', function errorFunc(err) {
+    console.log(err);
+});
+
+function responseHandler(res,clientId)
 {   
-    usersTerminal[jwt].disconnect();
-    delete usersTerminal[jwt];
+    var packet = {};
+    packet.response = res;
+    packet.clientId = clientId;
+    ws.send(JSON.stringify(packet));    
 }
