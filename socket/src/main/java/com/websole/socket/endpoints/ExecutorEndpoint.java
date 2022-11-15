@@ -33,9 +33,7 @@ public class ExecutorEndpoint {
     public void onMessage(String message, Session session) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         ExecutorRequest msg = mapper.readValue(message, ExecutorRequest.class);
-        if (Mappings.mappings.get(msg.clientId) == session.getId())
-            ClientEndpoint.sendResponse(msg.clientId, new Response(msg.response, "RESPONSE"));
-
+        ClientEndpoint.sendResponse(msg.clientId, new Response(msg.response, "RESPONSE"));
     }
 
     @OnClose

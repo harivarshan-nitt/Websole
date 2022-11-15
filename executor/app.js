@@ -1,3 +1,4 @@
+const process = require('node:process');
 const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:5000/ws/executor');
 
@@ -19,7 +20,7 @@ ws.on('message', function message(req) {
     }
     if(req.topic == "COMMAND")
     {
-        executeCommand(req.command);
+        executeCommand(req.clientId,req.command);
     }
 });
 
@@ -27,10 +28,15 @@ ws.on('error', function errorFunc(err) {
     console.log(err);
 });
 
-function responseHandler(res,clientId)
+var responseHandler = function (res,clientId)
 {   
     var packet = {};
     packet.response = res;
     packet.clientId = clientId;
     ws.send(JSON.stringify(packet));    
 }
+
+process.on('SIGINT', (code) => {
+    ws.close()
+    process.exit()
+});
