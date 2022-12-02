@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  websole:
+    build: .
+    env_file:
+      - express-app/.env
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - db
+  db:
+    image: mongo
+    restart: always
+     

@@ -1,4 +1,4 @@
-const dbUrl = 'mongodb://localhost:27017';
+var dbUrl = process.env.DB_URL;
 
 const mongoose = require('mongoose');
 
