@@ -6,8 +6,9 @@ const bcrypt = require("bcrypt");
 const { compare } = require('bcrypt');
 const jwt = require("jsonwebtoken");
 var rand = require("random-key");
+require('dotenv').config({ path: './.env' });
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const timeOut = "10m";
 const timeOutMs = 10*60*1000;
