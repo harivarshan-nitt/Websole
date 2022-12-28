@@ -2,7 +2,7 @@ version: '3'
 
 services:
   websole:
-    build: .
+    build: ./express-app
     env_file:
       - express-app/.env
     ports:

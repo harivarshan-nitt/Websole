@@ -2,7 +2,7 @@ FROM node:lts
 
 WORKDIR /usr/websole
 
-COPY ./express-app /usr/websole
+COPY ./ /usr/websole
 
 RUN npm install
 
