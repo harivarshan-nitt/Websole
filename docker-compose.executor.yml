@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  executor:
+    build: ./executor
+    env_file:
+      - executor/.env

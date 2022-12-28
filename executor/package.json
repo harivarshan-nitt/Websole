@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "node-process": "^1.0.1",
+    "ws": "^8.11.0"
+  }
+}
