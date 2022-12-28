@@ -1,6 +1,9 @@
-const process = require('node:process');
+const nodeProcess = require('node:process');
 const WebSocket = require('ws');
-const ws = new WebSocket('ws://localhost:5000/ws/executor');
+require('dotenv').config({ path: './.env' });
+
+const wsUrl = process.env.WS_URL
+const ws = new WebSocket(wsUrl);
 
 const {addClient,removeClient,executeCommand} = require('./Shell')
 
@@ -36,7 +39,7 @@ var responseHandler = function (res,clientId)
     ws.send(JSON.stringify(packet));    
 }
 
-process.on('SIGINT', (code) => {
+nodeProcess.on('SIGINT', (code) => {
     ws.close()
-    process.exit()
+    nodeProcess.exit()
 });

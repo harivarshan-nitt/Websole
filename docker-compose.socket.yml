@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  socket:
+    build: ./socket
+    env_file:
+      - socket/.env
+    ports:
+      - ${CLIENT_SOCKET}:${CLIENT_SOCKET}
+      - ${EXECUTOR_SOCKET}:${EXECUTOR_SOCKET}
