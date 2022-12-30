@@ -2,6 +2,14 @@ version: '3'
 
 services:
   executor:
+    networks:
+    - websole-networks
     build: ./executor
     env_file:
       - executor/.env
+    restart: always
+
+networks:
+    websole-networks:
+        external: false
+        name: websole-networks
